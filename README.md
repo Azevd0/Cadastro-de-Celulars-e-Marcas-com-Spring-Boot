@@ -12,7 +12,7 @@ Permite realizar operações de CRUD e consultas filtradas por modelo ou marca.
 - **Hibernate**
 - **ModelMapper**
 - **Validation API (Jakarta Validation)**
-- **Banco de dados H2 / MySQL (dependendo do profile)**
+- **Banco de dados H2 / PostgreSql (dependendo do profile)**
 
 ---
 
