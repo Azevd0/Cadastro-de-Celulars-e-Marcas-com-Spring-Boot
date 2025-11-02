@@ -35,7 +35,7 @@ public class CelularService {
         if(modelo.isPresent()){
             return modelo.get();
         }
-        throw new ObjectNotFoundException("Celular de modelo " + mod + " não encontrado");
+        throw new ObjectNotFoundException("Celular de modelo " + mod + " não encontrado, ou nome do modelo imcompleto.");
     }
     public List<Celular> findByMarcaNome(String nome){
         return celularRepository.findAllByMarcaNomeContainingIgnoreCase(nome);
@@ -61,3 +61,4 @@ public class CelularService {
         celularRepository.deleteById(id);
     }
 }
+
