@@ -119,7 +119,7 @@ PUT /celulares/{id}?marca={id}
 Descrição: Atualiza as informações de um celular existente.
 Exemplo de requisição:
 
-PUT /celulares/4?marca=1
+PUT /celulares/4?marca=2
 
 
 Corpo (JSON):
