@@ -1,7 +1,9 @@
 package com.SpringPhone.Cellphone.service;
 
+import com.SpringPhone.Cellphone.dto.CelularDto;
 import com.SpringPhone.Cellphone.exceptions.ObjectNotFoundException;
 import com.SpringPhone.Cellphone.model.Celular;
+import com.SpringPhone.Cellphone.model.Marca;
 import com.SpringPhone.Cellphone.repository.CelularRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,9 @@ import java.util.Optional;
 public class CelularService {
     @Autowired
     private CelularRepository celularRepository;
+
+    @Autowired
+    private MarcaService marcaService;
 
     public Celular findById(Long id){
         Optional<Celular> cll = celularRepository.findById(id);
@@ -35,27 +40,24 @@ public class CelularService {
     public List<Celular> findByMarcaNome(String nome){
         return celularRepository.findAllByMarcaNomeContainingIgnoreCase(nome);
     }
-    public Celular save(Celular celular){
-        buscarPorModelo(celular);
-        Celular cllSave = celularRepository.save(celular);
-        return cllSave;
+    public Celular save(Long id_mark, CelularDto celularDto){
+        celularDto.setId(null);
+        Marca marcaId = marcaService.findById(id_mark);
+        celularDto.setMarca(marcaId);
+        return celularRepository.save(new Celular(celularDto));
     }
-    public Celular update(Celular celular){
-        findById(celular.getId());
-        buscarPorModelo(celular);
-        Celular cllUpdate = celularRepository.save(celular);
-        return cllUpdate;
+    public Celular update(Long id_mark, Long id_cll, CelularDto celularDto){
+        Celular cellExistente = findById(id_cll);
+
+        cellExistente.setModelo(celularDto.getModelo());
+        cellExistente.setAno(celularDto.getAno());
+
+        Marca marca = marcaService.findById(id_mark);
+        cellExistente.setMarca(marca);
+        return celularRepository.save(cellExistente);
     }
     public void delete(Long id){
         findById(id);
         celularRepository.deleteById(id);
-    }
-    public void buscarPorModelo(Celular celular){
-        Optional<Celular> cll = celularRepository.findByModeloIgnoreCase(celular.getModelo());
-        if(cll.isPresent()){
-            if(cll.get().getId() != celular.getId()){
-                throw new IllegalArgumentException("Celular de modelo "+ celular.getModelo() + " já existe.");
-            }
-        }
     }
 }
