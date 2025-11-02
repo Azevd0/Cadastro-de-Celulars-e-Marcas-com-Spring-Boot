@@ -91,7 +91,7 @@ Exemplo:
 GET /celulares/marca/Motorola
 
 5. Criar novo celular
-POST /celulares
+POST /celulares?marca={id}
 
 
 Descrição: Cadastra um novo celular vinculado a uma marca existente.
@@ -99,11 +99,7 @@ Corpo (JSON):
 ```json
 {
   "modelo": "iPhone 15",
-  "ano": 2024,
-  "marca": {
-    "id": 3,
-    "nome": "Apple"
-  }
+  "ano": 2024
 }
 ```
 
@@ -117,21 +113,21 @@ Resposta:
 }
 ```
 6. Atualizar um celular
-PUT /celulares/{id}
+PUT /celulares/{id}?marca={id}
 
 
 Descrição: Atualiza as informações de um celular existente.
 Exemplo de requisição:
 
-PUT /celulares/4
+PUT /celulares/4?marca=1
 
 
 Corpo (JSON):
 ```json
 {
   "modelo": "Moto G40",
-  "ano": 2025,
-  "marca": { "id": 2, "nome": "Motorola" }
+  "ano": 2025
+  
 }
 ```
 7. Excluir um celular
