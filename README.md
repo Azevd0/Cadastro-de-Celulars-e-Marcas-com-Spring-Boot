@@ -215,41 +215,5 @@ Exemplo:
 
 DELETE /marcas/2
 
-🧱 Estrutura de Dados
-🟢 Celular
-Campo	Tipo	Descrição
-id	Long	Identificador do celular
-modelo	String	Nome do modelo
-ano	Integer	Ano de lançamento
-marca	Marca	Marca associada
-🟣 Marca
-Campo	Tipo	Descrição
-id	Long	Identificador da marca
-nome	String	Nome da marca
-🧪 Exemplo de fluxo completo
-
-Criar uma marca
-
-POST /marcas
-```json
-{
-  "nome": "Motorola"
-}
-```
-
-Criar um celular vinculado
-
-POST /celulares
-```json
-{
-  "modelo": "Moto G35",
-  "ano": 2024,
-  "marca": { "id": 1, "nome": "Motorola" }
-}
-```
-
-
-Buscar todos os celulares da marca
-
-GET /celulares?marca=1
+Retorno: 204 No Content
 
