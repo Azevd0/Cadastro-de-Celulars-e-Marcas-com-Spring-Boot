@@ -44,34 +44,16 @@ public class CelularController {
         return ResponseEntity.ok().body(celularDtoList);
     }
     @PostMapping
-    public ResponseEntity<CelularDto> criarCelular(@Valid @RequestBody CelularDto celularDto){
-        Celular celularNovo = new Celular();
-        celularNovo.setModelo(celularDto.getModelo());
-        celularNovo.setAno(celularDto.getAno());
-        celularNovo.setMarca(celularDto.getMarca());
-
-        Celular celular = celularService.save(celularNovo);
-
+    public ResponseEntity<CelularDto> criarCelular(@RequestParam(value = "marca", defaultValue = "0") Long id_mark,@Valid @RequestBody CelularDto celularDto){
+        Celular celular = celularService.save(id_mark, celularDto);
         return ResponseEntity.ok().body(new CelularDto(celular));
-//    Exemplo de criação:
-//        "modelo": "Moto-G35",
-//        "ano": 2024,
-//        "marca":{
-//              "id":3,
-//              "nome": "Motorola"
-//        }
+        //localhost:8080/celulares?marca=1
     }
     @PutMapping("/{id}")
-    public ResponseEntity<CelularDto> celularUpdate(@PathVariable Long id, @Valid @RequestBody CelularDto celularDto){
-        Celular celularUpdate = new Celular();
-        celularUpdate.setModelo(celularDto.getModelo());
-        celularUpdate.setAno(celularDto.getAno());
-        celularUpdate.setMarca(celularDto.getMarca());
-
-        celularUpdate.setId(id);
-        Celular celular = celularService.update(celularUpdate);
-
+    public ResponseEntity<CelularDto> celularUpdate(@RequestParam(value = "marca", defaultValue = "0") Long id_mark, @PathVariable Long id, @Valid @RequestBody CelularDto celularDTO ){
+        Celular celular = celularService.update(id_mark,id, celularDTO);
         return ResponseEntity.ok().body(new CelularDto(celular));
+        //localhost:8080/celulares/1?marca=2
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCelular(@PathVariable Long id){
