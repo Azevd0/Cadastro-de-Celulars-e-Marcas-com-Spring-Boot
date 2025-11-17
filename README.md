@@ -15,7 +15,7 @@ Permite realizar operações de CRUD e consultas filtradas por modelo ou marca.
 - **Banco de dados H2 / PostgreSql (dependendo do profile)**
 
 ---
-
+## Acesse a documentação atravez desse link http://localhost:8080/swagger-ui/index.html
 ## 🚀 Endpoints Disponíveis
 
 ### 🔹 **Celulares**
